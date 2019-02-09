@@ -18,14 +18,22 @@ class CardView: View {
     private let amountLabel: UILabel
     private let descriptionLabel: UILabel
     
-    private let marginTopCard = 10
-    private let marginBottomCard = 10
-    private let marginRightCard = 20
-    private let marginLeftCard = 20
-    private let heightCard = 200
-    private let heightTopCard = 120
-    private let fontSizeAmount: CGFloat = 40
-    private let fontSizeDescription: CGFloat = 20
+    private struct UISpecCard {
+        static let marginTop = 10
+        static let marginBottom = 10
+        static let marginRight = 20
+        static let marginLeft = 20
+        static let heigh = 200
+        static let heightTop = 120
+        
+        struct amount {
+            static let fontSize: CGFloat = 40
+        }
+        
+        struct description {
+            static let fontSize: CGFloat = 20
+        }
+    }
     
     override init() {
         containerView = View()
@@ -46,20 +54,20 @@ class CardView: View {
     
     override func setupConstraints() {
         containerView.snp.makeConstraints { (make) in
-            make.height.equalTo(heightCard)
+            make.height.equalTo(UISpecCard.heigh)
             make.top.bottom.trailing.leading.equalToSuperview()
         }
         
         cardView.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().inset(marginTopCard)
-            make.bottom.equalToSuperview().inset(marginBottomCard)
-            make.leading.equalToSuperview().inset(marginLeftCard)
-            make.trailing.equalToSuperview().inset(marginRightCard)
+            make.top.equalToSuperview().inset(UISpecCard.marginTop)
+            make.bottom.equalToSuperview().inset(UISpecCard.marginBottom)
+            make.leading.equalToSuperview().inset(UISpecCard.marginLeft)
+            make.trailing.equalToSuperview().inset(UISpecCard.marginRight)
         }
         
         topCardView.snp.makeConstraints { (make) in
             make.top.trailing.leading.equalToSuperview()
-            make.height.equalTo(heightTopCard)
+            make.height.equalTo(UISpecCard.heightTop)
         }
         
         bottomCardView.snp.makeConstraints { (make) in
@@ -101,11 +109,11 @@ class CardView: View {
     private func setupLabels() {
         amountLabel.text = "+120€"
         amountLabel.textAlignment = .center
-        amountLabel.font = UIFont.boldSystemFont(ofSize: fontSizeAmount)
+        amountLabel.font = UIFont.boldSystemFont(ofSize: UISpecCard.amount.fontSize)
         amountLabel.textColor = Theme.white.color
         
         descriptionLabel.text = "Today"
-        descriptionLabel.font = UIFont.boldSystemFont(ofSize: fontSizeDescription)
+        descriptionLabel.font = UIFont.boldSystemFont(ofSize: UISpecCard.description.fontSize)
         descriptionLabel.textColor = Theme.darkGray.color
     }
     
