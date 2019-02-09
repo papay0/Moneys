@@ -21,31 +21,33 @@ final class HomeViewController: UITableViewController, HomePresentable, HomeView
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cardsIdentifier")
+        setupTableView()
+    }
+    
+    // MARK: Private
+    
+    private func setupTableView() {
         tableView.register(CardTableViewCell.self, forCellReuseIdentifier: "cardCell")
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 300
+        tableView.estimatedRowHeight = 200
+        tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
     }
-    
-    // MARK: - Table view data source
+}
+
+extension HomeViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 2
     }
-    
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return UITableView.automaticDimension
-//    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cardCell", for: indexPath) as! CardTableViewCell
-        // cell.textLabel?.text = "test"
         return cell
     }
 }
