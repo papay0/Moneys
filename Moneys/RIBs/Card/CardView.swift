@@ -13,19 +13,27 @@ class CardView: View {
     private let containerView: View
     private let cardView: View
     private let topCardView: View
+    private let bottomCardView: View
     
     private let amountLabel: UILabel
+    private let descriptionLabel: UILabel
     
-    private let marginCard = 10
+    private let marginTopCard = 10
+    private let marginBottomCard = 10
+    private let marginRightCard = 20
+    private let marginLeftCard = 20
     private let heightCard = 200
     private let heightTopCard = 120
     private let fontSizeAmount: CGFloat = 40
+    private let fontSizeDescription: CGFloat = 20
     
     override init() {
         containerView = View()
         cardView = View()
         topCardView = View()
+        bottomCardView = View()
         amountLabel = UILabel()
+        descriptionLabel = UILabel()
         super.init()
         configure()
     }
@@ -43,7 +51,10 @@ class CardView: View {
         }
         
         cardView.snp.makeConstraints { (make) in
-            make.top.bottom.leading.trailing.equalToSuperview().inset(marginCard)
+            make.top.equalToSuperview().inset(marginTopCard)
+            make.bottom.equalToSuperview().inset(marginBottomCard)
+            make.leading.equalToSuperview().inset(marginLeftCard)
+            make.trailing.equalToSuperview().inset(marginRightCard)
         }
         
         topCardView.snp.makeConstraints { (make) in
@@ -51,17 +62,29 @@ class CardView: View {
             make.height.equalTo(heightTopCard)
         }
         
+        bottomCardView.snp.makeConstraints { (make) in
+            make.top.equalTo(topCardView.snp.bottom)
+            make.bottom.trailing.leading.equalToSuperview()
+        }
+        
         amountLabel.snp.makeConstraints { (make) in
             make.top.bottom.leading.trailing.equalToSuperview()
+        }
+        
+        descriptionLabel.snp.makeConstraints { (make) in
+            make.top.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(10)
         }
     }
     
     override func style() {
         cardView.layer.masksToBounds = true
         cardView.layer.cornerRadius = 6
-        // cardView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
-        cardView.backgroundColor = .blue
-        topCardView.backgroundColor = .red
+        cardView.layer.borderWidth = 0.7
+        cardView.layer.borderColor = Theme.borderCard.color.cgColor
+        
+        topCardView.backgroundColor = Theme.positive.color
+        bottomCardView.backgroundColor = Theme.grayish.color
     }
     
     // MARK: - Private
@@ -70,14 +93,20 @@ class CardView: View {
         addSubview(containerView)
         containerView.addSubview(cardView)
         cardView.addSubview(topCardView)
+        cardView.addSubview(bottomCardView)
         topCardView.addSubview(amountLabel)
+        bottomCardView.addSubview(descriptionLabel)
     }
     
     private func setupLabels() {
-        amountLabel.text = "120e"
+        amountLabel.text = "+120€"
         amountLabel.textAlignment = .center
-        amountLabel.font = amountLabel.font.withSize(fontSizeAmount)
-        amountLabel.textColor = .white
+        amountLabel.font = UIFont.boldSystemFont(ofSize: fontSizeAmount)
+        amountLabel.textColor = Theme.white.color
+        
+        descriptionLabel.text = "Today"
+        descriptionLabel.font = UIFont.boldSystemFont(ofSize: fontSizeDescription)
+        descriptionLabel.textColor = Theme.darkGray.color
     }
     
     required public init?(coder aDecoder: NSCoder) {
