@@ -66,7 +66,7 @@ extension HomeViewController {
         case .cumulated:
             cardUIData = CardUIData(amount: "+12€", description: "Cumulated", isPositive: true)
         case .companyStock:
-            cardUIData = CardUIData(amount: "-37€", description: "Apple", isPositive: false)
+            cardUIData = CardUIData(amount: "-37€", description: "Tesla", isPositive: false)
         }
         return cardUIData
     }
