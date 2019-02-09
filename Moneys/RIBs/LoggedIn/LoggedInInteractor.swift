@@ -1,6 +1,6 @@
 //
 //  LoggedInInteractor.swift
-//  Pettitude
+//  Moneys
 //
 //  Created by Arthur Papailhau on 09/12/2018.
 //  Copyright © 2018 Arthur Papailhau. All rights reserved.
