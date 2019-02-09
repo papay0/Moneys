@@ -9,12 +9,12 @@
 import UIKit
 import SnapKit
 
-class CardTableViewCell: UITableViewCell {
+class DefaultCardTableViewCell: UITableViewCell {
 
-    private let cardView: CardView
+    private let cardView: DefaultCardView
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        cardView = CardView()
+        cardView = DefaultCardView()
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         buildCell()

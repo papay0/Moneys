@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CardView: View {
+class DefaultCardView: View {
     
     private let containerView: View
     private let cardView: View

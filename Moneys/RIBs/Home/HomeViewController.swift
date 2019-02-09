@@ -29,7 +29,7 @@ final class HomeViewController: UITableViewController, HomePresentable, HomeView
     // MARK: Private
     
     private func setupTableView() {
-        tableView.register(CardTableViewCell.self, forCellReuseIdentifier: "cardCell")
+        tableView.register(DefaultCardTableViewCell.self, forCellReuseIdentifier: "cardCell")
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = UITableView.automaticDimension
@@ -49,7 +49,7 @@ extension HomeViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cardCell", for: indexPath) as! CardTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cardCell", for: indexPath) as! DefaultCardTableViewCell
         let cardUIData = getCardUIData(cardType: cardType[indexPath.row])
         cell.set(amount: cardUIData.amount)
         cell.set(description: cardUIData.description)

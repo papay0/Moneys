@@ -14,8 +14,8 @@
 		7057A4C7220F5E4B009F2F0D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7057A4AE220F5E4B009F2F0D /* HomeViewController.swift */; };
 		7057A4C8220F5E4B009F2F0D /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7057A4AF220F5E4B009F2F0D /* HomeRouter.swift */; };
 		7057A4C9220F5E4B009F2F0D /* HomeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7057A4B0220F5E4B009F2F0D /* HomeBuilder.swift */; };
-		7057A4CA220F5E4B009F2F0D /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7057A4B2220F5E4B009F2F0D /* CardView.swift */; };
-		7057A4CB220F5E4B009F2F0D /* CardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7057A4B3220F5E4B009F2F0D /* CardTableViewCell.swift */; };
+		7057A4CA220F5E4B009F2F0D /* DefaultCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7057A4B2220F5E4B009F2F0D /* DefaultCardView.swift */; };
+		7057A4CB220F5E4B009F2F0D /* DefaultCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7057A4B3220F5E4B009F2F0D /* DefaultCardTableViewCell.swift */; };
 		7057A4CC220F5E4B009F2F0D /* LoggedInBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7057A4B5220F5E4B009F2F0D /* LoggedInBuilder.swift */; };
 		7057A4CD220F5E4B009F2F0D /* LoggedInRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7057A4B6220F5E4B009F2F0D /* LoggedInRouter.swift */; };
 		7057A4CE220F5E4B009F2F0D /* LoggedInInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7057A4B7220F5E4B009F2F0D /* LoggedInInteractor.swift */; };
@@ -68,8 +68,8 @@
 		7057A4AE220F5E4B009F2F0D /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		7057A4AF220F5E4B009F2F0D /* HomeRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
 		7057A4B0220F5E4B009F2F0D /* HomeBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeBuilder.swift; sourceTree = "<group>"; };
-		7057A4B2220F5E4B009F2F0D /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
-		7057A4B3220F5E4B009F2F0D /* CardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardTableViewCell.swift; sourceTree = "<group>"; };
+		7057A4B2220F5E4B009F2F0D /* DefaultCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultCardView.swift; sourceTree = "<group>"; };
+		7057A4B3220F5E4B009F2F0D /* DefaultCardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultCardTableViewCell.swift; sourceTree = "<group>"; };
 		7057A4B5220F5E4B009F2F0D /* LoggedInBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggedInBuilder.swift; sourceTree = "<group>"; };
 		7057A4B6220F5E4B009F2F0D /* LoggedInRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggedInRouter.swift; sourceTree = "<group>"; };
 		7057A4B7220F5E4B009F2F0D /* LoggedInInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggedInInteractor.swift; sourceTree = "<group>"; };
@@ -198,8 +198,8 @@
 		7057A4B1220F5E4B009F2F0D /* Card */ = {
 			isa = PBXGroup;
 			children = (
-				7057A4B2220F5E4B009F2F0D /* CardView.swift */,
-				7057A4B3220F5E4B009F2F0D /* CardTableViewCell.swift */,
+				7057A4B2220F5E4B009F2F0D /* DefaultCardView.swift */,
+				7057A4B3220F5E4B009F2F0D /* DefaultCardTableViewCell.swift */,
 				707FC916220F7D7200F3AFFB /* CardType.swift */,
 			);
 			path = Card;
@@ -521,7 +521,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7057A4CA220F5E4B009F2F0D /* CardView.swift in Sources */,
+				7057A4CA220F5E4B009F2F0D /* DefaultCardView.swift in Sources */,
 				707FC633220F733200F3AFFB /* UIColor+Extension.swift in Sources */,
 				7057A4D2220F5E4B009F2F0D /* RootRouter.swift in Sources */,
 				7057A4CD220F5E4B009F2F0D /* LoggedInRouter.swift in Sources */,
@@ -540,7 +540,7 @@
 				7057A4D1220F5E4B009F2F0D /* RootComponent+LoggedIn.swift in Sources */,
 				7057A4C7220F5E4B009F2F0D /* HomeViewController.swift in Sources */,
 				7057A4C8220F5E4B009F2F0D /* HomeRouter.swift in Sources */,
-				7057A4CB220F5E4B009F2F0D /* CardTableViewCell.swift in Sources */,
+				7057A4CB220F5E4B009F2F0D /* DefaultCardTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
