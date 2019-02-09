@@ -31,6 +31,7 @@
 		7057A515220F5FC9009F2F0D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7057A513220F5FC9009F2F0D /* LaunchScreen.storyboard */; };
 		707FC631220F720100F3AFFB /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FC630220F720100F3AFFB /* Theme.swift */; };
 		707FC633220F733200F3AFFB /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FC632220F733200F3AFFB /* UIColor+Extension.swift */; };
+		707FC917220F7D7200F3AFFB /* CardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FC916220F7D7200F3AFFB /* CardType.swift */; };
 		AD120EF2AF79DF5D640FD319 /* Pods_MoneysTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4008A62C9853BCDFD59D4D83 /* Pods_MoneysTests.framework */; };
 		E54878D519CA6FCD357328B3 /* Pods_Moneys.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D75CD84BDEFDD86D2C6BCCE /* Pods_Moneys.framework */; };
 /* End PBXBuildFile section */
@@ -85,6 +86,7 @@
 		7057A513220F5FC9009F2F0D /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		707FC630220F720100F3AFFB /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		707FC632220F733200F3AFFB /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		707FC916220F7D7200F3AFFB /* CardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardType.swift; sourceTree = "<group>"; };
 		A934F5115AFC4417C76FDE34 /* Pods-MoneysUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoneysUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MoneysUITests/Pods-MoneysUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		AF006613C6DFD981DE84589B /* Pods-MoneysTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoneysTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MoneysTests/Pods-MoneysTests.release.xcconfig"; sourceTree = "<group>"; };
 		BB2ED59CED803FC70C9B0725 /* Pods-Moneys.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Moneys.release.xcconfig"; path = "Pods/Target Support Files/Pods-Moneys/Pods-Moneys.release.xcconfig"; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 			children = (
 				7057A4B2220F5E4B009F2F0D /* CardView.swift */,
 				7057A4B3220F5E4B009F2F0D /* CardTableViewCell.swift */,
+				707FC916220F7D7200F3AFFB /* CardType.swift */,
 			);
 			path = Card;
 			sourceTree = "<group>";
@@ -523,6 +526,7 @@
 				7057A4D2220F5E4B009F2F0D /* RootRouter.swift in Sources */,
 				7057A4CD220F5E4B009F2F0D /* LoggedInRouter.swift in Sources */,
 				7057A4D4220F5E4B009F2F0D /* AppComponent.swift in Sources */,
+				707FC917220F7D7200F3AFFB /* CardType.swift in Sources */,
 				7057A4C9220F5E4B009F2F0D /* HomeBuilder.swift in Sources */,
 				7057A4CE220F5E4B009F2F0D /* LoggedInInteractor.swift in Sources */,
 				7057A4D7220F5E4B009F2F0D /* View.swift in Sources */,

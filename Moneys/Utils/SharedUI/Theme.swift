@@ -24,7 +24,7 @@ extension Theme {
             case .positive:
                 instanceColor = UIColor(red: 112, green: 211, blue: 139)
             case .negative:
-                instanceColor = .red
+                instanceColor = UIColor(red: 221, green: 113, blue: 117)
             case .grayish:
                 instanceColor = UIColor.gray.withAlphaComponent(0.1)
             case .borderCard:

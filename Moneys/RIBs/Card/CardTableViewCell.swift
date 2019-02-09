@@ -11,24 +11,36 @@ import SnapKit
 
 class CardTableViewCell: UITableViewCell {
 
-    private let containerView: View
+    private let cardView: CardView
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        containerView = CardView()
+        cardView = CardView()
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         buildCell()
         setupCell()
     }
+    
+    func set(amount: String) {
+        cardView.set(amount: amount)
+    }
+    
+    func set(description: String) {
+        cardView.set(description: description)
+    }
+    
+    func set(isPositive: Bool) {
+        cardView.set(isPositive: isPositive)
+    }
 
     // MARK: - Private
     
     private func buildCell() {
-        addSubview(containerView)
+        addSubview(cardView)
     }
     
     private func setupCell() {
-        containerView.snp.makeConstraints { (make) in
+        cardView.snp.makeConstraints { (make) in
             make.top.bottom.leading.trailing.equalToSuperview()
         }
     }

@@ -18,23 +18,6 @@ class CardView: View {
     private let amountLabel: UILabel
     private let descriptionLabel: UILabel
     
-    private struct UISpecCard {
-        static let marginTop = 10
-        static let marginBottom = 10
-        static let marginRight = 20
-        static let marginLeft = 20
-        static let heigh = 200
-        static let heightTop = 120
-        
-        struct amount {
-            static let fontSize: CGFloat = 40
-        }
-        
-        struct description {
-            static let fontSize: CGFloat = 20
-        }
-    }
-    
     override init() {
         containerView = View()
         cardView = View()
@@ -44,6 +27,22 @@ class CardView: View {
         descriptionLabel = UILabel()
         super.init()
         configure()
+    }
+    
+    func set(amount: String) {
+        amountLabel.text = amount
+    }
+    
+    func set(description: String) {
+        descriptionLabel.text = description
+    }
+    
+    func set(isPositive: Bool) {
+        if isPositive {
+            topCardView.backgroundColor = Theme.positive.color
+        } else {
+            topCardView.backgroundColor = Theme.negative.color
+        }
     }
     
     override func build() {
@@ -91,7 +90,6 @@ class CardView: View {
         cardView.layer.borderWidth = 0.7
         cardView.layer.borderColor = Theme.borderCard.color.cgColor
         
-        topCardView.backgroundColor = Theme.positive.color
         bottomCardView.backgroundColor = Theme.grayish.color
     }
     
@@ -107,14 +105,29 @@ class CardView: View {
     }
     
     private func setupLabels() {
-        amountLabel.text = "+120€"
         amountLabel.textAlignment = .center
         amountLabel.font = UIFont.boldSystemFont(ofSize: UISpecCard.amount.fontSize)
         amountLabel.textColor = Theme.white.color
         
-        descriptionLabel.text = "Today"
         descriptionLabel.font = UIFont.boldSystemFont(ofSize: UISpecCard.description.fontSize)
         descriptionLabel.textColor = Theme.darkGray.color
+    }
+    
+    private struct UISpecCard {
+        static let marginTop = 10
+        static let marginBottom = 10
+        static let marginRight = 20
+        static let marginLeft = 20
+        static let heigh = 200
+        static let heightTop = 120
+        
+        struct amount {
+            static let fontSize: CGFloat = 40
+        }
+        
+        struct description {
+            static let fontSize: CGFloat = 20
+        }
     }
     
     required public init?(coder aDecoder: NSCoder) {

@@ -18,6 +18,8 @@ protocol HomeViewControllerDependency {}
 final class HomeViewController: UITableViewController, HomePresentable, HomeViewControllable, HomeViewControllerDependency {
 
     weak var listener: HomePresentableListener?
+    
+    fileprivate let cardType: [CardType] = [.today, .cumulated, .companyStock]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,11 +45,29 @@ extension HomeViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return cardType.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cardCell", for: indexPath) as! CardTableViewCell
+        let cardUIData = getCardUIData(cardType: cardType[indexPath.row])
+        cell.set(amount: cardUIData.amount)
+        cell.set(description: cardUIData.description)
+        cell.set(isPositive: cardUIData.isPositive)
+        cell.selectionStyle = .none
         return cell
+    }
+    
+    private func getCardUIData(cardType: CardType) -> CardUIData {
+        let cardUIData: CardUIData
+        switch cardType {
+        case .today:
+            cardUIData = CardUIData(amount: "+120€", description: "Today", isPositive: true)
+        case .cumulated:
+            cardUIData = CardUIData(amount: "+12€", description: "Cumulated", isPositive: true)
+        case .companyStock:
+            cardUIData = CardUIData(amount: "-37€", description: "Apple", isPositive: false)
+        }
+        return cardUIData
     }
 }
