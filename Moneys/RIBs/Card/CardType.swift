@@ -12,8 +12,15 @@ enum CardType {
     case companyStock
 }
 
-struct CardUIData {
+struct DefaultCardUIData {
     let amount: String
     let description: String
     let isPositive: Bool
+}
+
+struct StockCardUIData { // To improve
+    let amountToday: String
+    let pourcentageToday: String
+    let isPositive: Bool
+    let description: String
 }
