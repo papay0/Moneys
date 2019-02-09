@@ -12,9 +12,17 @@ class StockCardView: View {
     
     private let containerView: View
     private let cardView: View
+    private let cumulatedCardView: View
+    
     private let topCardView: View
-    private let middleCardView: View
+    private let middleCardView: View // TODO: Make it a stack view
     private let bottomCardView: View
+    
+    private let todayAmountView: View
+    private let todayPourcentageView: View
+    
+    private let topCardStackView: UIStackView
+    private let todayCardStackView: UIStackView
     
     private let amountTodayLabel: UILabel
     private let pourcentageTodayLabel: UILabel
@@ -25,9 +33,18 @@ class StockCardView: View {
     override init() {
         containerView = View()
         cardView = View()
-        topCardView = View()
+        cumulatedCardView = View()
+        
+        topCardView = View() // To make a gradient
         middleCardView = View()
         bottomCardView = View()
+        
+        todayAmountView = View()
+        todayPourcentageView = View()
+        
+        topCardStackView = UIStackView()
+        todayCardStackView = UIStackView()
+        
         amountTodayLabel = UILabel()
         pourcentageTodayLabel = UILabel()
         stockNameLabel = UILabel()
@@ -37,8 +54,15 @@ class StockCardView: View {
         configure()
         
         // TEST DATA
+        topCardView.backgroundColor = .orange
         todayDescriptionLabel.text = "Today"
         cumulatedDescriptionLabel.text = "Cumulated"
+        pourcentageTodayLabel.text = "+7%"
+        
+        cumulatedCardView.backgroundColor = .yellow
+        
+        // todayAmountView.backgroundColor = .blue
+        // todayPourcentageView.backgroundColor = .purple
     }
     
     func set(stockName: String) {
@@ -46,11 +70,11 @@ class StockCardView: View {
     }
     
     func set(isPositive: Bool) {
-        if isPositive {
-            topCardView.backgroundColor = Theme.positive.color
-        } else {
-            topCardView.backgroundColor = Theme.negative.color
-        }
+//        if isPositive {
+//            topCardStackView.backgroundColor = Theme.positive.color
+//        } else {
+//            topCardStackView.backgroundColor = Theme.negative.color
+//        }
     }
     
     func set(amountToday: String) {
@@ -65,6 +89,7 @@ class StockCardView: View {
         super.build()
         setupSubviews()
         setupLabels()
+        setupStackviews()
     }
     
     override func setupConstraints() {
@@ -97,9 +122,13 @@ class StockCardView: View {
             make.bottom.trailing.leading.equalToSuperview()
         }
         
-        amountTodayLabel.snp.makeConstraints { (make) in
-            make.top.bottom.leading.trailing.equalToSuperview()
+        topCardStackView.snp.makeConstraints { (make) in
+            make.top.bottom.trailing.leading.equalToSuperview()
         }
+        
+//        amountTodayLabel.snp.makeConstraints { (make) in
+//            make.top.bottom.leading.trailing.equalToSuperview()
+//        }
         
         stockNameLabel.snp.makeConstraints { (make) in
             make.top.bottom.equalToSuperview()
@@ -114,6 +143,14 @@ class StockCardView: View {
         cumulatedDescriptionLabel.snp.makeConstraints { (make) in
             make.top.bottom.equalToSuperview()
             make.trailing.equalToSuperview().inset(UISpecCard.description.margin)
+        }
+        
+        amountTodayLabel.snp.makeConstraints { (make) in
+            make.top.bottom.leading.trailing.equalToSuperview()
+        }
+        
+        pourcentageTodayLabel.snp.makeConstraints { (make) in
+            make.top.bottom.leading.trailing.equalToSuperview()
         }
     }
     
@@ -135,19 +172,36 @@ class StockCardView: View {
         cardView.addSubview(topCardView)
         cardView.addSubview(middleCardView)
         cardView.addSubview(bottomCardView)
-        topCardView.addSubview(amountTodayLabel)
+        topCardView.addSubview(topCardStackView)
+        topCardStackView.addArrangedSubview(todayCardStackView)
+        topCardStackView.addArrangedSubview(cumulatedCardView)
+        todayCardStackView.addArrangedSubview(todayAmountView)
+        todayCardStackView.addArrangedSubview(todayPourcentageView)
         middleCardView.addSubview(todayDescriptionLabel)
         middleCardView.addSubview(cumulatedDescriptionLabel)
         bottomCardView.addSubview(stockNameLabel)
+        todayAmountView.addSubview(amountTodayLabel)
+        todayPourcentageView.addSubview(pourcentageTodayLabel)
     }
     
     private func setupLabels() {
         amountTodayLabel.textAlignment = .center
-        amountTodayLabel.font = UIFont.boldSystemFont(ofSize: UISpecCard.amount.fontSize)
+        amountTodayLabel.font = UIFont.boldSystemFont(ofSize: 50)
         amountTodayLabel.textColor = Theme.white.color
+        
+        pourcentageTodayLabel.textAlignment = .center
+        pourcentageTodayLabel.textColor = Theme.white.color
         
         stockNameLabel.font = UIFont.boldSystemFont(ofSize: UISpecCard.stockName.fontSize)
         stockNameLabel.textColor = Theme.darkGray.color
+    }
+    
+    private func setupStackviews() {
+        topCardStackView.axis = .horizontal
+        topCardStackView.distribution = .fillEqually
+        
+        todayCardStackView.axis = .vertical
+        todayCardStackView.distribution = .fillProportionally
     }
     
     private struct UISpecCard {
