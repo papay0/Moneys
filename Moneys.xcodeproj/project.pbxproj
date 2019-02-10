@@ -34,7 +34,6 @@
 		707FC917220F7D7200F3AFFB /* CardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FC916220F7D7200F3AFFB /* CardType.swift */; };
 		707FC919220F84F400F3AFFB /* StockCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FC918220F84F400F3AFFB /* StockCardTableViewCell.swift */; };
 		707FC91B220F853000F3AFFB /* StockCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FC91A220F853000F3AFFB /* StockCardView.swift */; };
-		707FC91D220F98A200F3AFFB /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FC91C220F98A200F3AFFB /* Gradient.swift */; };
 		AD120EF2AF79DF5D640FD319 /* Pods_MoneysTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4008A62C9853BCDFD59D4D83 /* Pods_MoneysTests.framework */; };
 		E54878D519CA6FCD357328B3 /* Pods_Moneys.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D75CD84BDEFDD86D2C6BCCE /* Pods_Moneys.framework */; };
 /* End PBXBuildFile section */
@@ -92,7 +91,6 @@
 		707FC916220F7D7200F3AFFB /* CardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardType.swift; sourceTree = "<group>"; };
 		707FC918220F84F400F3AFFB /* StockCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockCardTableViewCell.swift; sourceTree = "<group>"; };
 		707FC91A220F853000F3AFFB /* StockCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockCardView.swift; sourceTree = "<group>"; };
-		707FC91C220F98A200F3AFFB /* Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
 		A934F5115AFC4417C76FDE34 /* Pods-MoneysUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoneysUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MoneysUITests/Pods-MoneysUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		AF006613C6DFD981DE84589B /* Pods-MoneysTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoneysTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MoneysTests/Pods-MoneysTests.release.xcconfig"; sourceTree = "<group>"; };
 		BB2ED59CED803FC70C9B0725 /* Pods-Moneys.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Moneys.release.xcconfig"; path = "Pods/Target Support Files/Pods-Moneys/Pods-Moneys.release.xcconfig"; sourceTree = "<group>"; };
@@ -269,7 +267,6 @@
 				7057A4C5220F5E4B009F2F0D /* View.swift */,
 				707FC630220F720100F3AFFB /* Theme.swift */,
 				707FC632220F733200F3AFFB /* UIColor+Extension.swift */,
-				707FC91C220F98A200F3AFFB /* Gradient.swift */,
 			);
 			path = SharedUI;
 			sourceTree = "<group>";
@@ -537,7 +534,6 @@
 				7057A4D4220F5E4B009F2F0D /* AppComponent.swift in Sources */,
 				707FC917220F7D7200F3AFFB /* CardType.swift in Sources */,
 				7057A4C9220F5E4B009F2F0D /* HomeBuilder.swift in Sources */,
-				707FC91D220F98A200F3AFFB /* Gradient.swift in Sources */,
 				7057A4CE220F5E4B009F2F0D /* LoggedInInteractor.swift in Sources */,
 				7057A4D7220F5E4B009F2F0D /* View.swift in Sources */,
 				7057A4D0220F5E4B009F2F0D /* RootViewController.swift in Sources */,
