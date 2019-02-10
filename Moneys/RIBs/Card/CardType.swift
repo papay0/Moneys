@@ -11,17 +11,3 @@ enum CardType {
     case cumulated
     case companyStock
 }
-
-struct DefaultCardUIData {
-    let amount: String
-    let description: String
-    let isPositive: Bool
-}
-
-struct StockCardUIData { // TODO: To improve
-    let amountToday: String
-    let pourcentageToday: String
-    let isTodayPositive: Bool
-    let isCumulatedPositive: Bool
-    let stockName: String
-}

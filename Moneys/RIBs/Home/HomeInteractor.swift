@@ -14,12 +14,12 @@ protocol HomeRouting: ViewableRouting {
 
 protocol HomePresentable: Presentable {
     var listener: HomePresentableListener? { get set }
-    func setMoneysUIData(moneysUIData: [MoneysUIData])
+    func setMoneysUIData(defaultMoneysUIData: [DefaultMoneyUIData], stockMoneysUIData: [StockMoneyUIData])
 }
 
 protocol HomeListener: class {}
 
-struct MoneysUIData {
+struct MoneyUIData {
     let moneyType: CardType
     
     // default
@@ -32,6 +32,24 @@ struct MoneysUIData {
     let cumulatedAmount: String? = nil
     let cumulatedPourcentage: String? = nil
     let stockName: String? = nil
+}
+
+struct DefaultMoneyUIData {
+    let moneyType: CardType
+    let amount: String
+    let description: String
+    let isPositive: Bool
+}
+
+struct StockMoneyUIData {
+    let moneyType: CardType
+    let todayAmount: String
+    let todayPourcentage: String
+    let cumulatedAmount: String
+    let cumulatedPourcentage: String
+    let stockName: String
+    let isTodayPositive: Bool
+    let isCumulatedPositive: Bool
 }
 
 final class HomeInteractor: PresentableInteractor<HomePresentable>, HomeInteractable, HomePresentableListener {
@@ -53,17 +71,49 @@ final class HomeInteractor: PresentableInteractor<HomePresentable>, HomeInteract
         moneyStream
             .moneys
             .subscribe(onNext: { (moneys) in
-                let moneysUIData = self.createMomeysUIData(moneys: moneys)
-                self.presenter.setMoneysUIData(moneysUIData: moneysUIData)
+                let (defaultMoneysUIData, stockMoneysUIData) = self.createMomeysUIData(moneys: moneys)
+                self.presenter.setMoneysUIData(defaultMoneysUIData: defaultMoneysUIData,
+                                               stockMoneysUIData: stockMoneysUIData)
             })
             .disposeOnDeactivate(interactor: self)
     }
     
     // MARK: - Private
     
-    private func createMomeysUIData(moneys: [Money]) -> [MoneysUIData] {
-        return moneys.map({ (money) -> MoneysUIData in
-            return MoneysUIData(moneyType: money.moneyType)
-        })
+    private func createMomeysUIData(moneys: [Money]) -> ([DefaultMoneyUIData], [StockMoneyUIData]) {
+        var defaultMoneysUIData: [DefaultMoneyUIData] = []
+        var stockMoneysUIData: [StockMoneyUIData] = []
+        for money in moneys {
+            if money.moneyType == .today || money.moneyType == .cumulated {
+                if let amount = money.amount,
+                    let description = money.description,
+                    let isPositive = money.isPositive {
+                    let defaultMoneyUIData = DefaultMoneyUIData(moneyType: money.moneyType,
+                                                                amount: amount,
+                                                                description: description,
+                                                                isPositive: isPositive)
+                    defaultMoneysUIData.append(defaultMoneyUIData)
+                }
+            } else {
+                if let todayAmount = money.todayAmount,
+                    let todayPourcentage = money.todayPourcentage,
+                    let cumulatedAmount = money.cumulatedAmount,
+                    let cumulatedPourcentage = money.cumulatedPourcentage,
+                    let stockName = money.stockName,
+                    let isTodayPositive = money.isTodayPositive,
+                    let isCumulatedPositive = money.isCumulatedPositive {
+                    let stockMoneyUIData = StockMoneyUIData(moneyType: money.moneyType,
+                                                              todayAmount: todayAmount,
+                                                              todayPourcentage: todayPourcentage,
+                                                              cumulatedAmount: cumulatedAmount,
+                                                              cumulatedPourcentage: cumulatedPourcentage,
+                                                              stockName: stockName,
+                                                              isTodayPositive: isTodayPositive,
+                                                              isCumulatedPositive: isCumulatedPositive)
+                    stockMoneysUIData.append(stockMoneyUIData)
+                }
+            }
+        }
+        return (defaultMoneysUIData, stockMoneysUIData)
     }
 }

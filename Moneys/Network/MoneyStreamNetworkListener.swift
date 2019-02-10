@@ -10,9 +10,11 @@ final class MoneyStreamNetworkListener {
     private let mutableMoneyStream: MutableMoneyStreaming
     
     private let mockMoneys: [Money] = [
-        Money(moneyType: .today),
-        Money(moneyType: .cumulated),
-        Money(moneyType: .companyStock)
+        Money(moneyType: .today, amount: "+120", description: "Today", isPositive: true),
+        Money(moneyType: .cumulated, amount: "-12", description: "Cumulated", isPositive: false),
+        Money(moneyType: .companyStock, todayAmount: "+1", todayPourcentage: "+2%", cumulatedAmount: "-23", cumulatedPourcentage: "-3%", stockName: "Apple", isTodayPositive: true, isCumulatedPositive: false),
+        Money(moneyType: .companyStock, todayAmount: "-1", todayPourcentage: "-2%", cumulatedAmount: "-23", cumulatedPourcentage: "-3%", stockName: "Tesla", isTodayPositive: false, isCumulatedPositive: false),
+        Money(moneyType: .companyStock, todayAmount: "+1", todayPourcentage: "+2%", cumulatedAmount: "+10", cumulatedPourcentage: "+3%", stockName: "Facebook", isTodayPositive: true, isCumulatedPositive: true)
     ]
     
     init(mutableMoneyStream: MutableMoneyStreaming) {

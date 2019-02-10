@@ -18,10 +18,8 @@ protocol HomeViewControllerDependency {}
 final class HomeViewController: UITableViewController, HomePresentable, HomeViewControllable, HomeViewControllerDependency {
     
     weak var listener: HomePresentableListener?
-    
-    fileprivate var defaultCardType: [CardType] = []
-    fileprivate var stockCardType: [CardType] = [.companyStock, .companyStock, .companyStock]
-    fileprivate var cardTypes: [CardType] = []
+    fileprivate var defaultMoneysUIData: [DefaultMoneyUIData] = []
+    fileprivate var stockMoneysUIData: [StockMoneyUIData] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,9 +28,12 @@ final class HomeViewController: UITableViewController, HomePresentable, HomeView
     
     // MARK: - HomePresentable
     
-    func setMoneysUIData(moneysUIData: [MoneysUIData]) {
-        for moneyUIData in moneysUIData {
-            cardTypes.append(moneyUIData.moneyType)
+    func setMoneysUIData(defaultMoneysUIData: [DefaultMoneyUIData], stockMoneysUIData: [StockMoneyUIData]) {
+        for defaultMoneyUIData in defaultMoneysUIData {
+            self.defaultMoneysUIData.append(defaultMoneyUIData)
+        }
+        for stockMoneyUIData in stockMoneysUIData {
+            self.stockMoneysUIData.append(stockMoneyUIData)
         }
     }
     
@@ -52,52 +53,37 @@ final class HomeViewController: UITableViewController, HomePresentable, HomeView
 extension HomeViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cardTypes.count
+        if section == 0 {
+            return defaultMoneysUIData.count
+        } else {
+            return stockMoneysUIData.count
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cardType = cardTypes[indexPath.row]
-        if cardType == .today || cardType == .cumulated {
+        if indexPath.section == 0 {
+            let card = defaultMoneysUIData[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "defaultCardCell", for: indexPath) as! DefaultCardTableViewCell
-            let cardUIData = getDefaultCardUIData(cardType: cardType)
-            cell.set(amount: cardUIData.amount)
-            cell.set(description: cardUIData.description)
-            cell.set(isPositive: cardUIData.isPositive)
+            cell.set(amount: card.amount)
+            cell.set(description: card.description)
+            cell.set(isPositive: card.isPositive)
             cell.selectionStyle = .none
             return cell
         } else {
+            let card = stockMoneysUIData[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "stockCardCell", for: indexPath) as! StockCardTableViewCell
-            let cardUIData = getStockCardUIData()
-            cell.set(todayAmount: cardUIData.amountToday, todayPourcentage: cardUIData.pourcentageToday, cumulatedAmount: "-23€", cumulatedPourcentage: "-3%")
-            cell.set(stockName: cardUIData.stockName)
-            cell.set(isTodayPositive: true, isCumulativePositive: false)
+            cell.set(todayAmount: card.todayAmount,
+                     todayPourcentage: card.todayPourcentage,
+                     cumulatedAmount: card.cumulatedAmount,
+                     cumulatedPourcentage: card.cumulatedPourcentage)
+            cell.set(stockName: card.stockName)
+            cell.set(isTodayPositive: card.isTodayPositive, isCumulativePositive: card.isCumulatedPositive)
             cell.selectionStyle = .none
             return cell
         }
-    }
-    
-    private func getDefaultCardUIData(cardType: CardType) -> DefaultCardUIData {
-        let cardUIData: DefaultCardUIData
-        switch cardType {
-        case .today:
-            cardUIData = DefaultCardUIData(amount: "+120€", description: "Today", isPositive: true)
-        case .cumulated:
-            cardUIData = DefaultCardUIData(amount: "-12€", description: "Cumulated", isPositive: false)
-        case .companyStock: // TODO: To remove when backend model
-            cardUIData = DefaultCardUIData(amount: "-37€", description: "Tesla", isPositive: false)
-        }
-        return cardUIData
-    }
-    
-    private func getStockCardUIData() -> StockCardUIData { // This will change when I do the backend models
-        return StockCardUIData(amountToday: "+1€",
-                               pourcentageToday: "+2%",
-                               isTodayPositive: true,
-                               isCumulatedPositive: false,
-                               stockName: "Tesla")
     }
 }
