@@ -25,7 +25,7 @@ final class MoneyStream: MutableMoneyStreaming {
     }
     
     var moneys: Observable<[Money]> {
-        return moneySubject.asObservable().distinctUntilChanged(==)
+        return moneySubject.asObservable()
     }
     
     // MARK: - Private

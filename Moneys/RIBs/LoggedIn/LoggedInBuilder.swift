@@ -13,13 +13,17 @@ protocol LoggedInDependency: Dependency {
 }
 
 final class LoggedInComponent: Component<LoggedInDependency>, HomeDependency {
-
+    
     fileprivate var loggedInViewController: LoggedInViewControllable {
         return dependency.loggedInViewController
     }
     
+    var mutableMoneyStream: MutableMoneyStreaming {
+        return shared { MoneyStream() }
+    }
+    
     fileprivate var networkListener: NetworkListener {
-        return shared { NetworkListener() }
+        return shared { NetworkListener(mutableMoneyStream: mutableMoneyStream) }
     }
 }
 

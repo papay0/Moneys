@@ -8,8 +8,8 @@
 
 final class NetworkListener {
     
-    init() {
-        moneyStreamNetworkListener = MoneyStreamNetworkListener()
+    init(mutableMoneyStream: MutableMoneyStreaming) {
+        moneyStreamNetworkListener = MoneyStreamNetworkListener(mutableMoneyStream: mutableMoneyStream)
     }
     
     func startListeners() {

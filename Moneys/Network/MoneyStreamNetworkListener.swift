@@ -15,8 +15,8 @@ final class MoneyStreamNetworkListener {
         Money(moneyType: .companyStock)
     ]
     
-    init() {
-        self.mutableMoneyStream = MoneyStream()
+    init(mutableMoneyStream: MutableMoneyStreaming) {
+        self.mutableMoneyStream = mutableMoneyStream
     }
     
     func startListener() {

@@ -7,12 +7,7 @@
 //
 
 // This model will change
-final class Money: Equatable {
-    
-    static func == (lhs: Money, rhs: Money) -> Bool { // TODO: Finish this
-        return lhs.amount == rhs.amount
-            && lhs.cumulatedAmount == rhs.cumulatedAmount
-    }
+final class Money {
     
     let moneyType: CardType
     

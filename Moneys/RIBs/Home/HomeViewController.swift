@@ -16,15 +16,24 @@ protocol HomePresentableListener: class {
 protocol HomeViewControllerDependency {}
 
 final class HomeViewController: UITableViewController, HomePresentable, HomeViewControllable, HomeViewControllerDependency {
-
+    
     weak var listener: HomePresentableListener?
     
-    fileprivate let defaultCardType: [CardType] = [.today, .cumulated]
-    fileprivate let stockCardType: [CardType] = [.companyStock, .companyStock, .companyStock]
+    fileprivate var defaultCardType: [CardType] = []
+    fileprivate var stockCardType: [CardType] = [.companyStock, .companyStock, .companyStock]
+    fileprivate var cardTypes: [CardType] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+    }
+    
+    // MARK: - HomePresentable
+    
+    func setMoneysUIData(moneysUIData: [MoneysUIData]) {
+        for moneyUIData in moneysUIData {
+            cardTypes.append(moneyUIData.moneyType)
+        }
     }
     
     // MARK: Private
@@ -43,27 +52,24 @@ final class HomeViewController: UITableViewController, HomePresentable, HomeView
 extension HomeViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return defaultCardType.count
-        } else {
-            return stockCardType.count
-        }
+        return cardTypes.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
+        let cardType = cardTypes[indexPath.row]
+        if cardType == .today || cardType == .cumulated {
             let cell = tableView.dequeueReusableCell(withIdentifier: "defaultCardCell", for: indexPath) as! DefaultCardTableViewCell
-            let cardUIData = getDefaultCardUIData(cardType: defaultCardType[indexPath.row])
+            let cardUIData = getDefaultCardUIData(cardType: cardType)
             cell.set(amount: cardUIData.amount)
             cell.set(description: cardUIData.description)
             cell.set(isPositive: cardUIData.isPositive)
             cell.selectionStyle = .none
             return cell
-        } else { // it's a stock section
+        } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "stockCardCell", for: indexPath) as! StockCardTableViewCell
             let cardUIData = getStockCardUIData()
             cell.set(todayAmount: cardUIData.amountToday, todayPourcentage: cardUIData.pourcentageToday, cumulatedAmount: "-23€", cumulatedPourcentage: "-3%")

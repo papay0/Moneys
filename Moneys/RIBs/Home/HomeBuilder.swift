@@ -9,9 +9,13 @@
 import RIBs
 
 protocol HomeDependency: Dependency {
+    var mutableMoneyStream: MutableMoneyStreaming { get }
 }
 
 final class HomeComponent: Component<HomeDependency> {
+    fileprivate var moneyStream: MoneyStreaming {
+        return dependency.mutableMoneyStream
+    }
 }
 
 // MARK: - Builder
@@ -27,10 +31,10 @@ final class HomeBuilder: Builder<HomeDependency>, HomeBuildable {
     }
 
     func build(with listener: HomeListener) -> HomeRouting {
-        let _ = HomeComponent(dependency: dependency)
+        let component = HomeComponent(dependency: dependency)
         let viewController = HomeViewController()
 
-        let interactor = HomeInteractor(presenter: viewController)
+        let interactor = HomeInteractor(presenter: viewController, moneyStream: component.moneyStream)
         interactor.listener = listener
 
         return HomeRouter(interactor: interactor,
