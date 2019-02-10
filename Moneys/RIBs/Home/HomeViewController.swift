@@ -34,6 +34,8 @@ final class HomeViewController: UITableViewController, HomePresentable, HomeView
     // MARK: - HomePresentable
     
     func setMoneysUIData(defaultMoneysUIData: [DefaultMoneyUIData], stockMoneysUIData: [StockMoneyUIData]) {
+        self.defaultMoneysUIData = []
+        self.stockMoneysUIData = []
         for defaultMoneyUIData in defaultMoneysUIData {
             self.defaultMoneysUIData.append(defaultMoneyUIData)
         }

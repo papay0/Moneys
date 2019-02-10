@@ -241,7 +241,7 @@ class StockCardView: View {
         static let marginBottom = 10
         static let marginRight = 20
         static let marginLeft = 20
-        static let heigh = 290
+        static let heigh = 270
         static let heightTop = 150
         static let heightMiddle = 60
         
