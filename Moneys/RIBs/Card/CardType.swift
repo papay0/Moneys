@@ -21,6 +21,7 @@ struct DefaultCardUIData {
 struct StockCardUIData { // To improve
     let amountToday: String
     let pourcentageToday: String
-    let isPositive: Bool
-    let description: String
+    let isTodayPositive: Bool
+    let isCumulatedPositive: Bool
+    let stockName: String
 }

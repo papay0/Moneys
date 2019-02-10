@@ -21,20 +21,22 @@ class StockCardTableViewCell: UITableViewCell {
         setupCell()
     }
     
-    func set(amountToday: String) {
-        cardView.set(amountToday: amountToday)
+    func set(todayAmount: String,
+             todayPourcentage: String,
+             cumulatedAmount: String,
+             cumulatedPourcentage: String) {
+        cardView.set(todayAmount: todayAmount,
+                     todayPourcentage: todayPourcentage,
+                     cumulatedAmount: cumulatedAmount,
+                     cumulatedPourcentage: cumulatedPourcentage)
     }
     
-    func set(pourcentageToday: String) {
-        cardView.set(pourcentageToday: pourcentageToday)
+    func set(stockName: String) {
+        cardView.set(stockName: stockName)
     }
     
-    func set(description: String) { // TODO: Update this method name
-        cardView.set(stockName: description)
-    }
-    
-    func set(isPositive: Bool) { // TODO: Update
-        cardView.set(isTodayPositive: true, isCumulativePositive: false)
+    func set(isTodayPositive: Bool, isCumulativePositive: Bool) {
+        cardView.set(isTodayPositive: isTodayPositive, isCumulativePositive: isCumulativePositive)
     }
     
     // MARK: - Private

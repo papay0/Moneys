@@ -12,7 +12,6 @@ class StockCardView: View {
     
     private let containerView: View
     private let cardView: View
-    private let cumulatedCardView: View
     
     @objc private let topCardView: View
     private let bottomCardView: View
@@ -20,12 +19,18 @@ class StockCardView: View {
     private let todayAmountView: View
     private let todayPourcentageView: View
     
+    private let cumulatedAmountView: View
+    private let cumulatedPourcentageView: View
+    
     private let topCardStackView: UIStackView
     private let middleCardStackView: UIStackView
     private let todayCardStackView: UIStackView
+    private let cumulatedCardStackView: UIStackView
     
-    private let amountTodayLabel: UILabel
-    private let pourcentageTodayLabel: UILabel
+    private let todayAmountLabel: UILabel
+    private let todayPourcentageLabel: UILabel
+    private let cumulatedAmountLabel: UILabel
+    private let cumulatedPourcentageLabel: UILabel
     private let stockNameLabel: UILabel
     private let todayDescriptionLabel: UILabel
     private let cumulatedDescriptionLabel: UILabel
@@ -33,56 +38,29 @@ class StockCardView: View {
     override init() {
         containerView = View()
         cardView = View()
-        cumulatedCardView = View()
         
-        topCardView = View() // To make a gradient
+        topCardView = View()
         bottomCardView = View()
         
         todayAmountView = View()
         todayPourcentageView = View()
+        cumulatedAmountView = View()
+        cumulatedPourcentageView = View()
         
         topCardStackView = UIStackView()
         middleCardStackView = UIStackView()
         todayCardStackView = UIStackView()
+        cumulatedCardStackView = UIStackView()
         
-        amountTodayLabel = UILabel()
-        pourcentageTodayLabel = UILabel()
+        todayAmountLabel = UILabel()
+        todayPourcentageLabel = UILabel()
+        cumulatedAmountLabel = UILabel()
+        cumulatedPourcentageLabel = UILabel()
         stockNameLabel = UILabel()
         todayDescriptionLabel = UILabel()
         cumulatedDescriptionLabel = UILabel()
         super.init()
         configure()
-        
-        // TEST DATA
-        // topCardView.backgroundColor = Theme.positive.color
-        
-//        topCardView.gradientLayer.colors = [UIColor.green.cgColor, UIColor.red.cgColor]
-//        topCardView.gradientLayer.gradient = GradientPoint.leftRight.draw()
-        
-        todayDescriptionLabel.text = "Today"
-        cumulatedDescriptionLabel.text = "Cumulated"
-        pourcentageTodayLabel.text = "+7%"
-        
-        // cumulatedCardView.backgroundColor = .yellow
-        
-        // todayAmountView.backgroundColor = .blue
-        // todayPourcentageView.backgroundColor = .purple
-    }
-    
-    func createGradientLayer(isTodayPositive: Bool, isCumulativePositive: Bool) -> CAGradientLayer {
-        let startColor = isTodayPositive ? Theme.positive.color.cgColor : Theme.negative.color.cgColor
-        let endColor = isCumulativePositive ? Theme.positive.color.cgColor : Theme.negative.color.cgColor
-        let gradientLayer: CAGradientLayer = {
-            let layer = CAGradientLayer()
-            layer.colors = [
-                startColor,
-                endColor
-            ]
-            layer.startPoint = CGPoint(x: 0.0, y: 0.5)
-            layer.endPoint = CGPoint(x: 1.0, y: 0.5)
-            return layer
-        }()
-        return gradientLayer
     }
     
     func set(stockName: String) {
@@ -93,22 +71,16 @@ class StockCardView: View {
         let gradientLayer = createGradientLayer(isTodayPositive: isTodayPositive,
                                                 isCumulativePositive: isCumulativePositive)
         topCardView.layer.addSublayer(gradientLayer)
-        // topCardView.layer.zPosition = -10
-        gradientLayer.frame = CGRect(x: 0, y: 0, width: 400, height: 150)
+        gradientLayer.frame = CGRect(x: 0, y: 0,
+                                     width: Int(UIScreen.main.bounds.width), height: UISpecCard.heightTop)
         topCardView.addSubview(topCardStackView)
-//        if isPositive {
-//            topCardStackView.backgroundColor = Theme.positive.color
-//        } else {
-//            topCardStackView.backgroundColor = Theme.negative.color
-//        }
     }
     
-    func set(amountToday: String) {
-        amountTodayLabel.text = amountToday
-    }
-    
-    func set(pourcentageToday: String) {
-        pourcentageTodayLabel.text = pourcentageToday
+    func set(todayAmount: String, todayPourcentage: String, cumulatedAmount: String, cumulatedPourcentage: String) {
+        todayAmountLabel.text = todayAmount
+        todayPourcentageLabel.text = todayPourcentage
+        cumulatedAmountLabel.text = cumulatedAmount
+        cumulatedPourcentageLabel.text = cumulatedPourcentage
     }
     
     override func build() {
@@ -157,21 +129,19 @@ class StockCardView: View {
             make.leading.trailing.equalToSuperview().inset(UISpecCard.description.margin)
         }
         
-//        todayDescriptionLabel.snp.makeConstraints { (make) in
-//            make.top.bottom.leading.trailing.equalToSuperview()
-//            // make.leading.equalToSuperview().inset(UISpecCard.description.margin)
-//        }
-//        
-//        cumulatedDescriptionLabel.snp.makeConstraints { (make) in
-//            make.top.bottom.trailing.leading.equalToSuperview()
-//            // make.trailing.equalToSuperview().inset(UISpecCard.description.margin)
-//        }
-        
-        amountTodayLabel.snp.makeConstraints { (make) in
+        todayAmountLabel.snp.makeConstraints { (make) in
+            make.top.bottom.leading.trailing.equalToSuperview()
+        }
+
+        todayPourcentageLabel.snp.makeConstraints { (make) in
             make.top.bottom.leading.trailing.equalToSuperview()
         }
         
-        pourcentageTodayLabel.snp.makeConstraints { (make) in
+        cumulatedAmountLabel.snp.makeConstraints { (make) in
+            make.top.bottom.leading.trailing.equalToSuperview()
+        }
+        
+        cumulatedPourcentageLabel.snp.makeConstraints { (make) in
             make.top.bottom.leading.trailing.equalToSuperview()
         }
     }
@@ -184,9 +154,6 @@ class StockCardView: View {
         
         bottomCardView.backgroundColor = Theme.grayish.color.withAlphaComponent(0.6)
         bottomCardView.backgroundColor = Theme.grayish.color
-        
-        // topCardView.gradientLayer.colors = [UIColor.green.cgColor, UIColor.red.cgColor]
-        // topCardView.gradientLayer.gradient = GradientPoint.leftRight.draw()
     }
     
     // MARK: - Private
@@ -199,23 +166,34 @@ class StockCardView: View {
         cardView.addSubview(bottomCardView)
         topCardView.addSubview(topCardStackView)
         topCardStackView.addArrangedSubview(todayCardStackView)
-        topCardStackView.addArrangedSubview(cumulatedCardView)
+        topCardStackView.addArrangedSubview(cumulatedCardStackView)
         todayCardStackView.addArrangedSubview(todayAmountView)
         todayCardStackView.addArrangedSubview(todayPourcentageView)
+        cumulatedCardStackView.addArrangedSubview(cumulatedAmountView)
+        cumulatedCardStackView.addArrangedSubview(cumulatedPourcentageView)
         middleCardStackView.addArrangedSubview(todayDescriptionLabel)
         middleCardStackView.addArrangedSubview(cumulatedDescriptionLabel)
         bottomCardView.addSubview(stockNameLabel)
-        todayAmountView.addSubview(amountTodayLabel)
-        todayPourcentageView.addSubview(pourcentageTodayLabel)
+        todayAmountView.addSubview(todayAmountLabel)
+        todayPourcentageView.addSubview(todayPourcentageLabel)
+        cumulatedAmountView.addSubview(cumulatedAmountLabel)
+        cumulatedPourcentageView.addSubview(cumulatedPourcentageLabel)
     }
     
     private func setupLabels() {
-        amountTodayLabel.textAlignment = .center
-        amountTodayLabel.font = UIFont.boldSystemFont(ofSize: 50)
-        amountTodayLabel.textColor = Theme.white.color
+        todayAmountLabel.textAlignment = .center
+        todayAmountLabel.font = UIFont.boldSystemFont(ofSize: 50)
+        todayAmountLabel.textColor = Theme.white.color
         
-        pourcentageTodayLabel.textAlignment = .center
-        pourcentageTodayLabel.textColor = Theme.white.color
+        cumulatedAmountLabel.textAlignment = .center
+        cumulatedAmountLabel.font = UIFont.boldSystemFont(ofSize: 50)
+        cumulatedAmountLabel.textColor = Theme.white.color
+        
+        todayPourcentageLabel.textAlignment = .center
+        todayPourcentageLabel.textColor = Theme.white.color
+        
+        cumulatedPourcentageLabel.textAlignment = .center
+        cumulatedPourcentageLabel.textColor = Theme.white.color
         
         stockNameLabel.font = UIFont.boldSystemFont(ofSize: UISpecCard.stockName.fontSize)
         stockNameLabel.textColor = Theme.darkGray.color
@@ -226,6 +204,9 @@ class StockCardView: View {
         cumulatedDescriptionLabel.textAlignment = .center
         cumulatedDescriptionLabel.textColor = .gray
         cumulatedDescriptionLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        
+        todayDescriptionLabel.text = "Today"
+        cumulatedDescriptionLabel.text = "Cumulated"
     }
     
     private func setupStackviews() {
@@ -237,6 +218,22 @@ class StockCardView: View {
         
         todayCardStackView.axis = .vertical
         todayCardStackView.distribution = .fillProportionally
+        
+        cumulatedCardStackView.axis = .vertical
+        cumulatedCardStackView.distribution = .fillProportionally
+    }
+    
+    private  func createGradientLayer(isTodayPositive: Bool, isCumulativePositive: Bool) -> CAGradientLayer {
+        let startColor = isTodayPositive ? Theme.positive.color.cgColor : Theme.negative.color.cgColor
+        let endColor = isCumulativePositive ? Theme.positive.color.cgColor : Theme.negative.color.cgColor
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [
+            startColor,
+            endColor
+        ]
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
+        gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
+        return gradientLayer
     }
     
     private struct UISpecCard {

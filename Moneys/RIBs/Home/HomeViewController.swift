@@ -20,7 +20,7 @@ final class HomeViewController: UITableViewController, HomePresentable, HomeView
     weak var listener: HomePresentableListener?
     
     fileprivate let defaultCardType: [CardType] = [.today, .cumulated]
-    fileprivate let stockCardType: [CardType] = [.companyStock]
+    fileprivate let stockCardType: [CardType] = [.companyStock, .companyStock, .companyStock]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,10 +66,9 @@ extension HomeViewController {
         } else { // it's a stock section
             let cell = tableView.dequeueReusableCell(withIdentifier: "stockCardCell", for: indexPath) as! StockCardTableViewCell
             let cardUIData = getStockCardUIData()
-            cell.set(amountToday: cardUIData.amountToday)
-            cell.set(description: cardUIData.description)
-            cell.set(pourcentageToday: cardUIData.pourcentageToday)
-            cell.set(isPositive: cardUIData.isPositive)
+            cell.set(todayAmount: cardUIData.amountToday, todayPourcentage: cardUIData.pourcentageToday, cumulatedAmount: "-23€", cumulatedPourcentage: "-3%")
+            cell.set(stockName: cardUIData.stockName)
+            cell.set(isTodayPositive: true, isCumulativePositive: false)
             cell.selectionStyle = .none
             return cell
         }
@@ -89,6 +88,10 @@ extension HomeViewController {
     }
     
     private func getStockCardUIData() -> StockCardUIData { // This will change when I do the backend models
-        return StockCardUIData(amountToday: "+1", pourcentageToday: "+2%", isPositive: true, description: "Tesla")
+        return StockCardUIData(amountToday: "+1€",
+                               pourcentageToday: "+2%",
+                               isTodayPositive: true,
+                               isCumulatedPositive: false,
+                               stockName: "Tesla")
     }
 }
