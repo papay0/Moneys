@@ -15,13 +15,13 @@ class StockCardView: View {
     private let cumulatedCardView: View
     
     @objc private let topCardView: View
-    private let middleCardView: View // TODO: Make it a stack view
     private let bottomCardView: View
     
     private let todayAmountView: View
     private let todayPourcentageView: View
     
     private let topCardStackView: UIStackView
+    private let middleCardStackView: UIStackView
     private let todayCardStackView: UIStackView
     
     private let amountTodayLabel: UILabel
@@ -36,13 +36,13 @@ class StockCardView: View {
         cumulatedCardView = View()
         
         topCardView = View() // To make a gradient
-        middleCardView = View()
         bottomCardView = View()
         
         todayAmountView = View()
         todayPourcentageView = View()
         
         topCardStackView = UIStackView()
+        middleCardStackView = UIStackView()
         todayCardStackView = UIStackView()
         
         amountTodayLabel = UILabel()
@@ -137,14 +137,14 @@ class StockCardView: View {
             make.height.equalTo(UISpecCard.heightTop)
         }
         
-        middleCardView.snp.makeConstraints { (make) in
+        middleCardStackView.snp.makeConstraints { (make) in
             make.top.equalTo(topCardView.snp.bottom)
             make.trailing.leading.equalToSuperview()
             make.height.equalTo(UISpecCard.heightMiddle)
         }
         
         bottomCardView.snp.makeConstraints { (make) in
-            make.top.equalTo(middleCardView.snp.bottom)
+            make.top.equalTo(middleCardStackView.snp.bottom)
             make.bottom.trailing.leading.equalToSuperview()
         }
         
@@ -157,15 +157,15 @@ class StockCardView: View {
             make.leading.trailing.equalToSuperview().inset(UISpecCard.description.margin)
         }
         
-        todayDescriptionLabel.snp.makeConstraints { (make) in
-            make.top.bottom.equalToSuperview()
-            make.leading.equalToSuperview().inset(UISpecCard.description.margin)
-        }
-        
-        cumulatedDescriptionLabel.snp.makeConstraints { (make) in
-            make.top.bottom.equalToSuperview()
-            make.trailing.equalToSuperview().inset(UISpecCard.description.margin)
-        }
+//        todayDescriptionLabel.snp.makeConstraints { (make) in
+//            make.top.bottom.leading.trailing.equalToSuperview()
+//            // make.leading.equalToSuperview().inset(UISpecCard.description.margin)
+//        }
+//        
+//        cumulatedDescriptionLabel.snp.makeConstraints { (make) in
+//            make.top.bottom.trailing.leading.equalToSuperview()
+//            // make.trailing.equalToSuperview().inset(UISpecCard.description.margin)
+//        }
         
         amountTodayLabel.snp.makeConstraints { (make) in
             make.top.bottom.leading.trailing.equalToSuperview()
@@ -189,36 +189,21 @@ class StockCardView: View {
         // topCardView.gradientLayer.gradient = GradientPoint.leftRight.draw()
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
-    // TODO: Refacto this method
-    private func createGradientLayer() {
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = topCardView.bounds
-        gradientLayer.colors = [UIColor.green.cgColor, UIColor.red.cgColor]
-        topCardView.layer.addSublayer(gradientLayer)
-    }
-    
     // MARK: - Private
     
     private func setupSubviews() {
-//        topCardView.layer.addSublayer(gradientLayer)
-//        gradientLayer.frame = CGRect(x: 0, y: 0, width: 400, height: 150)
-        
         addSubview(containerView)
         containerView.addSubview(cardView)
         cardView.addSubview(topCardView)
-        cardView.addSubview(middleCardView)
+        cardView.addSubview(middleCardStackView)
         cardView.addSubview(bottomCardView)
         topCardView.addSubview(topCardStackView)
         topCardStackView.addArrangedSubview(todayCardStackView)
         topCardStackView.addArrangedSubview(cumulatedCardView)
         todayCardStackView.addArrangedSubview(todayAmountView)
         todayCardStackView.addArrangedSubview(todayPourcentageView)
-        middleCardView.addSubview(todayDescriptionLabel)
-        middleCardView.addSubview(cumulatedDescriptionLabel)
+        middleCardStackView.addArrangedSubview(todayDescriptionLabel)
+        middleCardStackView.addArrangedSubview(cumulatedDescriptionLabel)
         bottomCardView.addSubview(stockNameLabel)
         todayAmountView.addSubview(amountTodayLabel)
         todayPourcentageView.addSubview(pourcentageTodayLabel)
@@ -234,11 +219,21 @@ class StockCardView: View {
         
         stockNameLabel.font = UIFont.boldSystemFont(ofSize: UISpecCard.stockName.fontSize)
         stockNameLabel.textColor = Theme.darkGray.color
+        
+        todayDescriptionLabel.textAlignment = .center
+        todayDescriptionLabel.textColor = .gray
+        todayDescriptionLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        cumulatedDescriptionLabel.textAlignment = .center
+        cumulatedDescriptionLabel.textColor = .gray
+        cumulatedDescriptionLabel.font = UIFont.boldSystemFont(ofSize: 16)
     }
     
     private func setupStackviews() {
         topCardStackView.axis = .horizontal
         topCardStackView.distribution = .fillEqually
+        
+        middleCardStackView.axis = .horizontal
+        middleCardStackView.distribution = .fillEqually
         
         todayCardStackView.axis = .vertical
         todayCardStackView.distribution = .fillProportionally
@@ -249,9 +244,9 @@ class StockCardView: View {
         static let marginBottom = 10
         static let marginRight = 20
         static let marginLeft = 20
-        static let heigh = 300
+        static let heigh = 290
         static let heightTop = 150
-        static let heightMiddle = 75
+        static let heightMiddle = 60
         
         struct amount {
             static let fontSize: CGFloat = 40

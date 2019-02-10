@@ -81,7 +81,7 @@ extension HomeViewController {
         case .today:
             cardUIData = DefaultCardUIData(amount: "+120€", description: "Today", isPositive: true)
         case .cumulated:
-            cardUIData = DefaultCardUIData(amount: "+12€", description: "Cumulated", isPositive: false)
+            cardUIData = DefaultCardUIData(amount: "-12€", description: "Cumulated", isPositive: false)
         case .companyStock: // TODO: To remove when backend model
             cardUIData = DefaultCardUIData(amount: "-37€", description: "Tesla", isPositive: false)
         }
