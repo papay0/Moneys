@@ -33,8 +33,8 @@ class StockCardTableViewCell: UITableViewCell {
         cardView.set(stockName: description)
     }
     
-    func set(isPositive: Bool) {
-        cardView.set(isPositive: isPositive)
+    func set(isPositive: Bool) { // TODO: Update
+        cardView.set(isTodayPositive: true, isCumulativePositive: false)
     }
     
     // MARK: - Private

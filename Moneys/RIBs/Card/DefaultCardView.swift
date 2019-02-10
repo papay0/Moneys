@@ -1,5 +1,5 @@
 //
-//  CardView.swift
+//  DefaultCardView.swift
 //  Moneys
 //
 //  Created by Arthur Papailhau on 09/02/2019.

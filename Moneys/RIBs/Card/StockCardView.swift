@@ -1,5 +1,5 @@
 //
-//  CardView.swift
+//  StockCardView.swift
 //  Moneys
 //
 //  Created by Arthur Papailhau on 09/02/2019.
@@ -14,7 +14,7 @@ class StockCardView: View {
     private let cardView: View
     private let cumulatedCardView: View
     
-    private let topCardView: View
+    @objc private let topCardView: View
     private let middleCardView: View // TODO: Make it a stack view
     private let bottomCardView: View
     
@@ -54,22 +54,48 @@ class StockCardView: View {
         configure()
         
         // TEST DATA
-        topCardView.backgroundColor = .orange
+        // topCardView.backgroundColor = Theme.positive.color
+        
+//        topCardView.gradientLayer.colors = [UIColor.green.cgColor, UIColor.red.cgColor]
+//        topCardView.gradientLayer.gradient = GradientPoint.leftRight.draw()
+        
         todayDescriptionLabel.text = "Today"
         cumulatedDescriptionLabel.text = "Cumulated"
         pourcentageTodayLabel.text = "+7%"
         
-        cumulatedCardView.backgroundColor = .yellow
+        // cumulatedCardView.backgroundColor = .yellow
         
         // todayAmountView.backgroundColor = .blue
         // todayPourcentageView.backgroundColor = .purple
+    }
+    
+    func createGradientLayer(isTodayPositive: Bool, isCumulativePositive: Bool) -> CAGradientLayer {
+        let startColor = isTodayPositive ? Theme.positive.color.cgColor : Theme.negative.color.cgColor
+        let endColor = isCumulativePositive ? Theme.positive.color.cgColor : Theme.negative.color.cgColor
+        let gradientLayer: CAGradientLayer = {
+            let layer = CAGradientLayer()
+            layer.colors = [
+                startColor,
+                endColor
+            ]
+            layer.startPoint = CGPoint(x: 0.0, y: 0.5)
+            layer.endPoint = CGPoint(x: 1.0, y: 0.5)
+            return layer
+        }()
+        return gradientLayer
     }
     
     func set(stockName: String) {
         stockNameLabel.text = stockName
     }
     
-    func set(isPositive: Bool) {
+    func set(isTodayPositive: Bool, isCumulativePositive: Bool) {
+        let gradientLayer = createGradientLayer(isTodayPositive: isTodayPositive,
+                                                isCumulativePositive: isCumulativePositive)
+        topCardView.layer.addSublayer(gradientLayer)
+        // topCardView.layer.zPosition = -10
+        gradientLayer.frame = CGRect(x: 0, y: 0, width: 400, height: 150)
+        topCardView.addSubview(topCardStackView)
 //        if isPositive {
 //            topCardStackView.backgroundColor = Theme.positive.color
 //        } else {
@@ -126,10 +152,6 @@ class StockCardView: View {
             make.top.bottom.trailing.leading.equalToSuperview()
         }
         
-//        amountTodayLabel.snp.makeConstraints { (make) in
-//            make.top.bottom.leading.trailing.equalToSuperview()
-//        }
-        
         stockNameLabel.snp.makeConstraints { (make) in
             make.top.bottom.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(UISpecCard.description.margin)
@@ -162,11 +184,29 @@ class StockCardView: View {
         
         bottomCardView.backgroundColor = Theme.grayish.color.withAlphaComponent(0.6)
         bottomCardView.backgroundColor = Theme.grayish.color
+        
+        // topCardView.gradientLayer.colors = [UIColor.green.cgColor, UIColor.red.cgColor]
+        // topCardView.gradientLayer.gradient = GradientPoint.leftRight.draw()
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
+    // TODO: Refacto this method
+    private func createGradientLayer() {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = topCardView.bounds
+        gradientLayer.colors = [UIColor.green.cgColor, UIColor.red.cgColor]
+        topCardView.layer.addSublayer(gradientLayer)
     }
     
     // MARK: - Private
     
     private func setupSubviews() {
+//        topCardView.layer.addSublayer(gradientLayer)
+//        gradientLayer.frame = CGRect(x: 0, y: 0, width: 400, height: 150)
+        
         addSubview(containerView)
         containerView.addSubview(cardView)
         cardView.addSubview(topCardView)
