@@ -8,24 +8,30 @@ db.settings({ timestampsInSnapshots: true });
 
 exports.getMoneys = functions.https.onCall(async (data: any, context: any) => {
   console.log("getMoneys start")
-  const defautMoney = {
+  const defautMoneyToday = {
     type: "today",
-    amount: "+12",
+    amount: "+12€",
     description: "Today",
     isPositive: true
   }
+  const defautMoneyCumulated = {
+    type: "cumulated",
+    amount: "-2€",
+    description: "Cumulated",
+    isPositive: false
+  }
   const stockMoney = {
     type: "stock",
-    todayAmount: "+2",
+    todayAmount: "+2€",
     todayPourcentage: "+1%",
-    cumulatedAmount: "-3",
+    cumulatedAmount: "-3€",
     cumulatedPourcentage: "-2%",
     stockName: "Uber",
     isTodayPositive: true,
     isCumulatedPositive: false,
   }
   return {
-      defaultMoneys: [defautMoney],
+      defaultMoneys: [defautMoneyToday, defautMoneyCumulated],
       stockMoneys: [stockMoney, stockMoney]
   };
 });

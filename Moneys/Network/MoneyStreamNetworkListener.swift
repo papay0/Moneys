@@ -52,11 +52,19 @@ final class MoneyStreamNetworkListener {
 
     private func parseDefaultMoneys(key: String, subJson: JSON) -> Money? {
         guard let amount = subJson["amount"].string else { return nil }
-        return Money(moneyType: .today, amount: amount, description: "Today", isPositive: true)
+        guard let description = subJson["description"].string else { return nil }
+        guard let isPositive = subJson["isPositive"].bool else { return nil }
+        return Money(moneyType: .today, amount: amount, description: description, isPositive: isPositive)
     }
     
     private func parseStockMoneys(key: String, subJson: JSON) -> Money? {
         guard let todayAmount = subJson["todayAmount"].string else { return nil }
-        return Money(moneyType: .companyStock, todayAmount: todayAmount, todayPourcentage: "+2%", cumulatedAmount: "+10€", cumulatedPourcentage: "+3%", stockName: "Facebook", isTodayPositive: true, isCumulatedPositive: true)
+        guard let todayPourcentage = subJson["todayPourcentage"].string else { return nil }
+        guard let cumulatedAmount = subJson["cumulatedAmount"].string else { return nil }
+        guard let cumulatedPourcentage = subJson["cumulatedPourcentage"].string else { return nil }
+        guard let stockName = subJson["stockName"].string else { return nil }
+        guard let isTodayPositive = subJson["isTodayPositive"].bool else { return nil }
+        guard let isCumulatedPositive = subJson["isCumulatedPositive"].bool else { return nil }
+        return Money(moneyType: .companyStock, todayAmount: todayAmount, todayPourcentage: todayPourcentage, cumulatedAmount: cumulatedAmount, cumulatedPourcentage: cumulatedPourcentage, stockName: stockName, isTodayPositive: isTodayPositive, isCumulatedPositive: isCumulatedPositive)
     }
 }
