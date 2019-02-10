@@ -16,6 +16,10 @@ final class NetworkListener {
         moneyStreamNetworkListener.startListener()
     }
     
+    func getMoneys() {
+        moneyStreamNetworkListener.getMoneys()
+    }
+    
     // MARK: - Private
     
     private let moneyStreamNetworkListener: MoneyStreamNetworkListener

@@ -38,14 +38,17 @@ struct StockMoneyUIData {
 }
 
 final class HomeInteractor: PresentableInteractor<HomePresentable>, HomeInteractable, HomePresentableListener {
-
     weak var router: HomeRouting?
     weak var listener: HomeListener?
 
     private let moneyStream: MoneyStreaming
+    private let networkListener: NetworkListener
     
-    init(presenter: HomePresentable, moneyStream: MoneyStreaming) {
+    init(presenter: HomePresentable,
+         moneyStream: MoneyStreaming,
+         networkListener: NetworkListener) {
         self.moneyStream = moneyStream
+        self.networkListener = networkListener
         super.init(presenter: presenter)
         presenter.listener = self
     }
@@ -61,6 +64,12 @@ final class HomeInteractor: PresentableInteractor<HomePresentable>, HomeInteract
                                                stockMoneysUIData: stockMoneysUIData)
             })
             .disposeOnDeactivate(interactor: self)
+    }
+    
+    // MARK: - HomePresentableListener
+    
+    func getMoneys() {
+        networkListener.getMoneys()
     }
     
     // MARK: - Private

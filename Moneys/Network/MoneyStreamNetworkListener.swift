@@ -22,6 +22,10 @@ final class MoneyStreamNetworkListener {
         listen()
     }
     
+    func getMoneys() {
+        listen()
+    }
+    
     private func listen() {
         
         functions.httpsCallable("getMoneys").call(["username": "", "password": "00000"]) { (result, error) in

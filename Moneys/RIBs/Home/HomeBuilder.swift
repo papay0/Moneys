@@ -10,11 +10,16 @@ import RIBs
 
 protocol HomeDependency: Dependency {
     var mutableMoneyStream: MutableMoneyStreaming { get }
+    var networkListener: NetworkListener { get }
 }
 
 final class HomeComponent: Component<HomeDependency> {
     fileprivate var moneyStream: MoneyStreaming {
         return dependency.mutableMoneyStream
+    }
+    
+    fileprivate var networkListener: NetworkListener {
+        return dependency.networkListener
     }
 }
 
@@ -34,7 +39,9 @@ final class HomeBuilder: Builder<HomeDependency>, HomeBuildable {
         let component = HomeComponent(dependency: dependency)
         let viewController = HomeViewController()
 
-        let interactor = HomeInteractor(presenter: viewController, moneyStream: component.moneyStream)
+        let interactor = HomeInteractor(presenter: viewController,
+                                        moneyStream: component.moneyStream,
+                                        networkListener: component.networkListener)
         interactor.listener = listener
 
         return HomeRouter(interactor: interactor,

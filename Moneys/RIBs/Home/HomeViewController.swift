@@ -11,6 +11,7 @@ import RxSwift
 import UIKit
 
 protocol HomePresentableListener: class {
+    func getMoneys()
 }
 
 protocol HomeViewControllerDependency {}
@@ -18,12 +19,16 @@ protocol HomeViewControllerDependency {}
 final class HomeViewController: UITableViewController, HomePresentable, HomeViewControllable, HomeViewControllerDependency {
     
     weak var listener: HomePresentableListener?
+    
     fileprivate var defaultMoneysUIData: [DefaultMoneyUIData] = []
     fileprivate var stockMoneysUIData: [StockMoneyUIData] = []
+    
+    private let customRefreshControl = UIRefreshControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+        setupRefreshControl()
     }
     
     // MARK: - HomePresentable
@@ -35,10 +40,15 @@ final class HomeViewController: UITableViewController, HomePresentable, HomeView
         for stockMoneyUIData in stockMoneysUIData {
             self.stockMoneysUIData.append(stockMoneyUIData)
         }
+        customRefreshControl.endRefreshing()
         tableView.reloadData()
     }
     
     // MARK: Private
+    
+    private func setupRefreshControl() {
+        customRefreshControl.addTarget(self, action: #selector(refreshMoneysData), for: .valueChanged)
+    }
     
     private func setupTableView() {
         tableView.register(DefaultCardTableViewCell.self, forCellReuseIdentifier: "defaultCardCell")
@@ -48,6 +58,11 @@ final class HomeViewController: UITableViewController, HomePresentable, HomeView
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 200
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        tableView.refreshControl = customRefreshControl
+    }
+    
+    @objc private func refreshMoneysData() {
+        listener?.getMoneys()
     }
 }
 

@@ -22,7 +22,7 @@ final class LoggedInComponent: Component<LoggedInDependency>, HomeDependency {
         return shared { MoneyStream() }
     }
     
-    fileprivate var networkListener: NetworkListener {
+    var networkListener: NetworkListener {
         return shared { NetworkListener(mutableMoneyStream: mutableMoneyStream) }
     }
 }

@@ -9,6 +9,7 @@ def common_pods
   pod 'Firebase/Core'
   pod 'Firebase/Functions'
   pod 'Firebase/Auth'
+  pod 'Firebase/Messaging'
   
   pod 'SwiftyJSON', '~> 4.0'
 end
