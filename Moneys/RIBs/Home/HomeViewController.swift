@@ -35,6 +35,7 @@ final class HomeViewController: UITableViewController, HomePresentable, HomeView
         for stockMoneyUIData in stockMoneysUIData {
             self.stockMoneysUIData.append(stockMoneyUIData)
         }
+        tableView.reloadData()
     }
     
     // MARK: Private

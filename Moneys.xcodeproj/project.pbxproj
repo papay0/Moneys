@@ -38,6 +38,7 @@
 		707FC92522103A7900F3AFFB /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FC92422103A7900F3AFFB /* Money.swift */; };
 		707FC92722103F7F00F3AFFB /* MoneyStreamNetworkListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FC92622103F7F00F3AFFB /* MoneyStreamNetworkListener.swift */; };
 		707FC929221040C000F3AFFB /* NetworkListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FC928221040C000F3AFFB /* NetworkListener.swift */; };
+		707FC92B2210715D00F3AFFB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 707FC92A2210715D00F3AFFB /* GoogleService-Info.plist */; };
 		AD120EF2AF79DF5D640FD319 /* Pods_MoneysTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4008A62C9853BCDFD59D4D83 /* Pods_MoneysTests.framework */; };
 		E54878D519CA6FCD357328B3 /* Pods_Moneys.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D75CD84BDEFDD86D2C6BCCE /* Pods_Moneys.framework */; };
 /* End PBXBuildFile section */
@@ -99,6 +100,7 @@
 		707FC92422103A7900F3AFFB /* Money.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Money.swift; sourceTree = "<group>"; };
 		707FC92622103F7F00F3AFFB /* MoneyStreamNetworkListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyStreamNetworkListener.swift; sourceTree = "<group>"; };
 		707FC928221040C000F3AFFB /* NetworkListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkListener.swift; sourceTree = "<group>"; };
+		707FC92A2210715D00F3AFFB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A934F5115AFC4417C76FDE34 /* Pods-MoneysUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoneysUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MoneysUITests/Pods-MoneysUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		AF006613C6DFD981DE84589B /* Pods-MoneysTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoneysTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MoneysTests/Pods-MoneysTests.release.xcconfig"; sourceTree = "<group>"; };
 		BB2ED59CED803FC70C9B0725 /* Pods-Moneys.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Moneys.release.xcconfig"; path = "Pods/Target Support Files/Pods-Moneys/Pods-Moneys.release.xcconfig"; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 		7057A4BE220F5E4B009F2F0D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				707FC92A2210715D00F3AFFB /* GoogleService-Info.plist */,
 				7057A512220F5FC9009F2F0D /* Assets.xcassets */,
 				7057A513220F5FC9009F2F0D /* LaunchScreen.storyboard */,
 				7057A4BF220F5E4B009F2F0D /* App Start */,
@@ -439,6 +442,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7057A515220F5FC9009F2F0D /* LaunchScreen.storyboard in Resources */,
+				707FC92B2210715D00F3AFFB /* GoogleService-Info.plist in Resources */,
 				7057A514220F5FC9009F2F0D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -469,24 +473,28 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Moneys/Pods-Moneys-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/RIBs/RIBs.framework",
 				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RIBs.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -755,7 +763,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.arthur.moneys.Moneys;
+				PRODUCT_BUNDLE_IDENTIFIER = com.arthur.moneys;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -773,7 +781,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.arthur.moneys.Moneys;
+				PRODUCT_BUNDLE_IDENTIFIER = com.arthur.moneys;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

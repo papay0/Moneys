@@ -1,3 +1,5 @@
+/* tslint:disable */
+
 const admin = require('firebase-admin');
 const functions = require('firebase-functions');
 admin.initializeApp();
@@ -5,6 +7,7 @@ const db = admin.firestore();
 db.settings({ timestampsInSnapshots: true });
 
 exports.getMoneys = functions.https.onCall(async (data: any, context: any) => {
+  console.log("getMoneys start")
   const defautMoney = {
     type: "today",
     amount: "+12",
@@ -22,7 +25,7 @@ exports.getMoneys = functions.https.onCall(async (data: any, context: any) => {
     isCumulatedPositive: false,
   }
   return {
-      default: [defautMoney],
-      stock: [stockMoney, stockMoney]
+      defaultMoneys: [defautMoney],
+      stockMoneys: [stockMoney, stockMoney]
   };
 });

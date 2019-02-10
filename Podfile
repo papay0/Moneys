@@ -7,6 +7,10 @@ def common_pods
   pod 'RxCocoa', '~> 4.0'
 
   pod 'Firebase/Core'
+  pod 'Firebase/Functions'
+  pod 'Firebase/Auth'
+  
+  pod 'SwiftyJSON', '~> 4.0'
 end
 
 target 'Moneys' do
