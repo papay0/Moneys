@@ -24,14 +24,11 @@ final class MoneyStreamNetworkListener {
     
     private func listen() {
         
-        functions.httpsCallable("getMoneys").call() { (result, error) in
-            if let error = error as NSError? {
-            }
+        functions.httpsCallable("getMoneys").call(["username": "", "password": "00000"]) { (result, error) in
             var moneys: [Money] = []
             if let defaultMoneys = (result?.data as? [String: Any])?["defaultMoneys"] {
                 let json = JSON(defaultMoneys)
                 for (key, subJson):(String, JSON) in json {
-                    print(key, subJson)
                     if let defaultMoney = self.parseDefaultMoneys(key: key, subJson: subJson) {
                         moneys.append(defaultMoney)
                     }
@@ -40,7 +37,6 @@ final class MoneyStreamNetworkListener {
             if let stocks = (result?.data as? [String: Any])?["stockMoneys"] {
                 let json = JSON(stocks)
                 for (key, subJson):(String, JSON) in json {
-                    print(key, subJson)
                     if let stockMoney = self.parseStockMoneys(key: key, subJson: subJson) {
                         moneys.append(stockMoney)
                     }
