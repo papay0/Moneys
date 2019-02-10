@@ -21,15 +21,20 @@ final class LoggedInInteractor: Interactor, LoggedInInteractable {
     weak var router: LoggedInRouting?
     weak var listener: LoggedInListener?
 
-    override init() {}
+    init(networkListener: NetworkListener) {
+        self.networkListener = networkListener
+    }
 
     override func didBecomeActive() {
         super.didBecomeActive()
+        startListeners()
     }
-
-    override func willResignActive() {
-        super.willResignActive()
-
-        router?.cleanupViews()
+    
+    // MARK: - Private
+    
+    private func startListeners() {
+        networkListener.startListeners()
     }
+    
+    private let networkListener: NetworkListener
 }

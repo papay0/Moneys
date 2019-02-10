@@ -17,6 +17,10 @@ final class LoggedInComponent: Component<LoggedInDependency>, HomeDependency {
     fileprivate var loggedInViewController: LoggedInViewControllable {
         return dependency.loggedInViewController
     }
+    
+    fileprivate var networkListener: NetworkListener {
+        return shared { NetworkListener() }
+    }
 }
 
 // MARK: - Builder
@@ -33,7 +37,7 @@ final class LoggedInBuilder: Builder<LoggedInDependency>, LoggedInBuildable {
 
     func build(with listener: LoggedInListener) -> LoggedInRouting {
         let component = LoggedInComponent(dependency: dependency)
-        let interactor = LoggedInInteractor()
+        let interactor = LoggedInInteractor(networkListener: component.networkListener)
         interactor.listener = listener
 
         let homeBuilder = HomeBuilder(dependency: component)
