@@ -34,6 +34,9 @@
 		707FC917220F7D7200F3AFFB /* CardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FC916220F7D7200F3AFFB /* CardType.swift */; };
 		707FC919220F84F400F3AFFB /* StockCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FC918220F84F400F3AFFB /* StockCardTableViewCell.swift */; };
 		707FC91B220F853000F3AFFB /* StockCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FC91A220F853000F3AFFB /* StockCardView.swift */; };
+		707FC92222103A0800F3AFFB /* MoneyStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FC92122103A0800F3AFFB /* MoneyStream.swift */; };
+		707FC92522103A7900F3AFFB /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FC92422103A7900F3AFFB /* Money.swift */; };
+		707FC92722103F7F00F3AFFB /* MoneyStreamNetworkListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707FC92622103F7F00F3AFFB /* MoneyStreamNetworkListener.swift */; };
 		AD120EF2AF79DF5D640FD319 /* Pods_MoneysTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4008A62C9853BCDFD59D4D83 /* Pods_MoneysTests.framework */; };
 		E54878D519CA6FCD357328B3 /* Pods_Moneys.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D75CD84BDEFDD86D2C6BCCE /* Pods_Moneys.framework */; };
 /* End PBXBuildFile section */
@@ -91,6 +94,9 @@
 		707FC916220F7D7200F3AFFB /* CardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardType.swift; sourceTree = "<group>"; };
 		707FC918220F84F400F3AFFB /* StockCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockCardTableViewCell.swift; sourceTree = "<group>"; };
 		707FC91A220F853000F3AFFB /* StockCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockCardView.swift; sourceTree = "<group>"; };
+		707FC92122103A0800F3AFFB /* MoneyStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyStream.swift; sourceTree = "<group>"; };
+		707FC92422103A7900F3AFFB /* Money.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Money.swift; sourceTree = "<group>"; };
+		707FC92622103F7F00F3AFFB /* MoneyStreamNetworkListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyStreamNetworkListener.swift; sourceTree = "<group>"; };
 		A934F5115AFC4417C76FDE34 /* Pods-MoneysUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoneysUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MoneysUITests/Pods-MoneysUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		AF006613C6DFD981DE84589B /* Pods-MoneysTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoneysTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MoneysTests/Pods-MoneysTests.release.xcconfig"; sourceTree = "<group>"; };
 		BB2ED59CED803FC70C9B0725 /* Pods-Moneys.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Moneys.release.xcconfig"; path = "Pods/Target Support Files/Pods-Moneys/Pods-Moneys.release.xcconfig"; sourceTree = "<group>"; };
@@ -152,6 +158,8 @@
 		7057A479220F5DE2009F2F0D /* Moneys */ = {
 			isa = PBXGroup;
 			children = (
+				707FC92322103A6B00F3AFFB /* Models */,
+				707FC91F221039CD00F3AFFB /* Network */,
 				7057A4BE220F5E4B009F2F0D /* Resources */,
 				7057A4AB220F5E4B009F2F0D /* RIBs */,
 				7057A4C3220F5E4B009F2F0D /* Utils */,
@@ -269,6 +277,31 @@
 				707FC632220F733200F3AFFB /* UIColor+Extension.swift */,
 			);
 			path = SharedUI;
+			sourceTree = "<group>";
+		};
+		707FC91F221039CD00F3AFFB /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				707FC92622103F7F00F3AFFB /* MoneyStreamNetworkListener.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		707FC920221039D700F3AFFB /* Stream */ = {
+			isa = PBXGroup;
+			children = (
+				707FC92122103A0800F3AFFB /* MoneyStream.swift */,
+			);
+			path = Stream;
+			sourceTree = "<group>";
+		};
+		707FC92322103A6B00F3AFFB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				707FC920221039D700F3AFFB /* Stream */,
+				707FC92422103A7900F3AFFB /* Money.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		B1F1C478C11B66904EABECE9 /* Frameworks */ = {
@@ -530,8 +563,10 @@
 				7057A4CA220F5E4B009F2F0D /* DefaultCardView.swift in Sources */,
 				707FC633220F733200F3AFFB /* UIColor+Extension.swift in Sources */,
 				7057A4D2220F5E4B009F2F0D /* RootRouter.swift in Sources */,
+				707FC92222103A0800F3AFFB /* MoneyStream.swift in Sources */,
 				7057A4CD220F5E4B009F2F0D /* LoggedInRouter.swift in Sources */,
 				7057A4D4220F5E4B009F2F0D /* AppComponent.swift in Sources */,
+				707FC92522103A7900F3AFFB /* Money.swift in Sources */,
 				707FC917220F7D7200F3AFFB /* CardType.swift in Sources */,
 				7057A4C9220F5E4B009F2F0D /* HomeBuilder.swift in Sources */,
 				7057A4CE220F5E4B009F2F0D /* LoggedInInteractor.swift in Sources */,
@@ -545,6 +580,7 @@
 				7057A4D5220F5E4B009F2F0D /* AppDelegate.swift in Sources */,
 				7057A4D1220F5E4B009F2F0D /* RootComponent+LoggedIn.swift in Sources */,
 				7057A4C7220F5E4B009F2F0D /* HomeViewController.swift in Sources */,
+				707FC92722103F7F00F3AFFB /* MoneyStreamNetworkListener.swift in Sources */,
 				707FC919220F84F400F3AFFB /* StockCardTableViewCell.swift in Sources */,
 				707FC91B220F853000F3AFFB /* StockCardView.swift in Sources */,
 				7057A4C8220F5E4B009F2F0D /* HomeRouter.swift in Sources */,
