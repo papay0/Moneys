@@ -19,21 +19,6 @@ protocol HomePresentable: Presentable {
 
 protocol HomeListener: class {}
 
-struct MoneyUIData {
-    let moneyType: CardType
-    
-    // default
-    let amount: String? = nil
-    let description: String? = nil
-    
-    // stock
-    let todayAmount: String? = nil
-    let todayPourcentage: String? = nil
-    let cumulatedAmount: String? = nil
-    let cumulatedPourcentage: String? = nil
-    let stockName: String? = nil
-}
-
 struct DefaultMoneyUIData {
     let moneyType: CardType
     let amount: String
